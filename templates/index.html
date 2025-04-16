@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form action="/add" method="POST">
+            <input type="text" name="task" placeholder="Enter a task" required>
+            <button type="submit">Add</button>
+        </form>
+
+        <ul>
+            {% for todo in todos %}
+                <li>
+                    <form action="/update/{{ todo._id }}" method="POST" class="inline-form">
+                        <input type="text" name="updated_task" value="{{ todo.task }}">
+                        <button type="submit">Update</button>
+                    </form>
+                    <a href="/delete/{{ todo._id }}" title="Delete">
+    			<i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+		    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
